@@ -54,3 +54,21 @@ Then the next milestone is automatically selected. If the last milestone is comp
 Buildings need electricity to operate which has be produced by another type of building.
 The building might need resources that are converted or just takes up space and is slow.
 Electricity might have a simplified logistic system to be distributed across buildings.
+
+## Work to do
+
+- **Map:** we can either handcraft or generate one. Need to find a nice tile set
+- **UI:** we have the following elements:
+  - Build menu
+  - Milestone display
+  - Global inventory
+  - Building details
+  - Unlock notification
+- **Game design:**
+  - Items/Resources
+  - Buildings
+  - Recipes
+  - Milestones
+- **Game Elements:**
+  - Logistics system
+  - Buildings
