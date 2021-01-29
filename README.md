@@ -1,9 +1,18 @@
 # Automation Game (to be named)
 
+## Setting
+In a post apocalyptic world, earth is polluted and uninhabitable. Humans have been forced to live in bunkers deep under the ground, and send out androids to do the work of making earth inhabitable again. 
+
 ## Game Design
 
 By either clicking a resource node or resources in a building inventory, they get transferred into the global inventory.
 
+```
+! The map should be tile-based, which simplifies path-finding. We could implement a simple a-star path-finding algo.
+! Resources have to be sent to different different bunkers, that process the items into new items.
+! Processing speed is influenced by surrounding tiles, some tiles add bonuses to some production, while removing from some.
+! For this scope, we should start with a small amount of resources.
+```
 ### Buildings
 
 The player can place buildings on the map. 
@@ -27,6 +36,10 @@ Examples:
    - different types of constructors depending on number of recipe inputs
  - Storage to create buffer
 
+```
+! Bunkers are static resource nodes. 
+! Bunkers can be buildings. 
+```
 ### Logistics
 
 The function of logistics is to move items between buildings:
@@ -48,6 +61,10 @@ We need to decide how logistics interact with buildings:
 Each milestone will require a certain number of items in the global inventory.
 When all the resources are present, the milestone is completed and new unlocks (buildings or recipes) are granted.
 Then the next milestone is automatically selected. If the last milestone is completed the player wins.
+
+```
+! Each milestone leads to the discovery of lost knowledge
+```
 
 ### Electricity (stretch goal that we have to cut anyway)
 
