@@ -14,6 +14,7 @@ Building properties:
  - speed: milliseconds the building needs to move an item
  - size: V2 defining the size of the building
  - destination: output location for the building relative to its origin point
+ - requires: tile id that it needs to be build on
  */
 
 export default {
