@@ -15,12 +15,42 @@ Building properties:
  - size: V2 defining the size of the building
  - destination: output location for the building relative to its origin point
  
- - type: type of building: mining, production, power, logistics
-
- - milestone: required science level 
 
 =======
  - requires: tile id that it needs to be build on
+ - type: type of building: mining, production, power, logistics
+ - milestone: required science level 
+
+	recipes:
+
+	Level 1: ground
+	reqs:
+		power
+		robots
+		vehicles
+
+		robots:
+			ic
+			iron
+		ic:
+			see below
+		vehicles:
+		fuel:
+		iron
+		engine:fuel
+
+
+		Soil Replenisher	robots		ic
+										iron
+							vehicles	iron
+										fuel
+	
+	target: build an Soil replenisher.
+	
+	Level 2: water
+
+	Level 3: air
+	new resource: water
 
 
  */
