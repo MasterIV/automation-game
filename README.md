@@ -1,4 +1,5 @@
-# Automation Game (to be named)
+# The Lost World
+
 
 ## Setting
 In a post apocalyptic world, earth is polluted and uninhabitable. Humans have been forced to live in bunkers deep under the ground, and send out androids to do the work of making earth inhabitable again. 
