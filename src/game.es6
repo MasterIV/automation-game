@@ -13,6 +13,12 @@ window.onload = () => {
 	for(let i in buildings)
 		graphics.add(buildings[i].image);
 
+	// Title screen
+	graphics.add("img/title.png");
+	graphics.add("img/button_play.png");
+	graphics.add("img/button_credits.png");
+	graphics.add("img/button_help.png");
+
 	graphics.load(() => {
 		document.getElementById('loading').style.display = 'none';
 
