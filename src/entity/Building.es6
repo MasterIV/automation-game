@@ -1,10 +1,8 @@
-import Entity from 'tin-engine/basic/entity';
-import Animation from './Animation';
-import ImageEntity from 'tin-engine/basic/image';
 import Inventory from './Inventory';
 import Morph from 'tin-engine/basic/morph';
 import Item from './Item';
 import V2 from 'tin-engine/geo/v2';
+import Rotateable from './Rotateable';
 
 function rotate(r, v) {
 	return [
@@ -15,43 +13,11 @@ function rotate(r, v) {
 	][r](v);
 }
 
-export default class Building extends Entity {
+export default class Building extends Rotateable {
 	constructor(pos, grid, rota, definition) {
-		super(pos);
-
-		// translate the destination
-		// maybe collect the closest tile within the destination to be the origin
-		this.dest = grid.sum(definition.destination);
-		this.rota = rota;
-
+		super(pos, grid, rota, definition);
 		this.inv = new Inventory();
-		this.def = definition;
 		this.processing = 0;
-
-		if(definition.frames) {
-			if(!Animation.groups[definition.image])
-				Animation.add(definition.image, 200, definition.frames);
-			this.add(new Animation(definition.image, definition.image));
-		} else {
-			this.add(new ImageEntity(null, definition.image));
-		}
-	}
-
-	draw(ctx) {
-		ctx.save();
-		ctx.translate(this.position.x + this.size.x, this.position.y + this.size.y);
-
-		// Do rotation stuff here
-		ctx.rotate(Math.PI * this.rota/2);
-		//
-		// if(this.rota == 1) ctx.translate(this.size.y, 0);
-		// else if(this.rota ==2) ctx.translate(-this.size.x, -this.size.y);
-		// else if(this.rota == 3) ctx.translate(0, this.size.x);
-
-		if (this.onDraw) this.onDraw(ctx);
-		this.dispatch(this.entities, 'draw', ctx);
-
-		ctx.restore();
 	}
 
 	accepts(type) {

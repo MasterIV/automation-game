@@ -17,7 +17,7 @@ export default class BuildingMap extends Entity {
 				this.map[x][y] = null;
 		}
 
-		this.rotate = 3;
+		this.rotate = 0;
 		this.selected = null;
 		this.demolish = false;
 	}
@@ -34,8 +34,12 @@ export default class BuildingMap extends Entity {
 		const size = definition.size;
 		let has_required = !definition.required;
 
-		for (let x = 0; x < size.x; x++)
-			for (let y = 0; y < size.y; y++) {
+		for (let a = 0; a < size.x; a++)
+			for (let b = 0; b < size.y; b++) {
+				let x,y;
+				if(this.rotate%2) { x=b; y=a; }
+				else { x=a; y=b; }
+
 				if (this.buildingAt(pos.x + x, pos.y + y))
 					return false;
 
@@ -60,9 +64,15 @@ export default class BuildingMap extends Entity {
 				? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
 				: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
 
-			for (let x = 0; x < size.x; x++)
-				for (let y = 0; y < size.y; y++)
+
+			for (let a = 0; a < size.x; a++)
+				for (let b = 0; b < size.y; b++) {
+					let x,y;
+					if(this.rotate%2) { x=b; y=a; }
+					else { x=a; y=b; }
+
 					this.map[pos.x+x][pos.y+y] = building;
+				}
 
 			this.add(building);
 			this.selected = null;
