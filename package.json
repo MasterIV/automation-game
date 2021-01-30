@@ -10,7 +10,9 @@
   },
 
   "dependencies": {
-    "tin-engine": "*"
+    "tin-engine": "*",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
 
   "devDependencies": {
