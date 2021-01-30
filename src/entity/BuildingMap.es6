@@ -1,5 +1,6 @@
 import Entity from 'tin-engine/basic/entity';
 import Building from './Building';
+import Logistics from './Logistics';
 
 const t = 32;
 
@@ -25,18 +26,26 @@ export default class BuildingMap extends Entity {
 	}
 
 	buildingAt(x, y) {
-		return this.map[x][y];
+		return this.map[x] && this.map[x][y];
 	}
 
 	isValid(pos, definition) {
 		const size = definition.size;
+		let has_required = !definition.required;
 
 		for (let x = 0; x < size.x; x++)
-			for (let y = 0; y < size.y; y++)
+			for (let y = 0; y < size.y; y++) {
 				if (this.buildingAt(pos.x + x, pos.y + y))
 					return false;
 
-		return true;
+				const tile = this.resources.data[pos.x + x + ((pos.y + y) * this.resources.width)];
+				if (tile !== 0 && tile !== definition.required)
+					return false;
+
+				has_required = has_required || tile === definition.required;
+			}
+
+		return has_required;
 	}
 
 	onClick(pos) {
@@ -46,13 +55,13 @@ export default class BuildingMap extends Entity {
 			// check and deduct resources
 
 			const size = this.selected.size;
-			const building = new Building(pos.prd(t), 0, this.selected);
+			const building = this.selected.type === 'logistics'
+				? new Logistics(pos.prd(t), pos, 0, this.selected)
+				: new Building(pos.prd(t), pos, 0, this.selected);
 
 			for (let x = 0; x < size.x; x++)
 				for (let y = 0; y < size.y; y++)
 					this.map[pos.x+x][pos.y+y] = building;
-
-			console.log(this.map);
 
 			this.add(building);
 			this.selected = null;

@@ -4,11 +4,14 @@ export default class Inventory {
 	}
 
 	add(items) {
+		if(!items) return;
 		for(let i in items)
 			this.items[i] = (this.items[i]|0) +  items[i];
 	}
 
 	has(items) {
+		if(!items)
+			return true;
 		for(let i in items)
 			if( this.items[i] < items[i])
 				return false;
@@ -16,6 +19,7 @@ export default class Inventory {
 	}
 
 	remove(items) {
+		if(!items) return;
 		for(let i in items)
 			this.items[i] = (this.items[i]|0) - items[i];
 	}
@@ -29,5 +33,9 @@ export default class Inventory {
 		for(let i in this.items)
 			size += (this.items[i]|0);
 		return size;
+	}
+
+	get(type) {
+		return this.items[type] | 0;
 	}
 }

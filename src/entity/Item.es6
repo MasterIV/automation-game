@@ -1,8 +1,10 @@
 import ImageEntity from 'tin-engine/basic/image';
+import items from '../config/items';
 
 export default class Item extends ImageEntity {
-	constructor(pos, definition) {
-		this.def = definition;
-		super(pos, definition.image);
+	constructor(pos, type) {
+		super(pos, items[type].image);
+		this.type = type;
+		this.def = items[type];
 	}
 }
