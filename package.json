@@ -2,19 +2,16 @@
   "name": "automation-game",
   "version": "1.0.0",
   "description": "",
-
   "scripts": {
     "debug": "node_modules/.bin/webpack --config webpack.config.js --mode development -w",
     "build": "node_modules/.bin/webpack --config webpack.config.js --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-
   "dependencies": {
     "tin-engine": "*",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },
-
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -29,18 +26,14 @@
     "webpack": "^4.6.0",
     "webpack-cli": "^3.2.1"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/MasterIV/automation-game.git"
   },
-
   "author": "Tobias Rojahn",
   "license": "MIT",
-
   "bugs": {
     "url": "https://github.com/MasterIV/automation-game/issues"
   },
-
   "homepage": "https://github.com/MasterIV/automation-game#readme"
 }

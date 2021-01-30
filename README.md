@@ -72,6 +72,37 @@ Buildings need electricity to operate which has be produced by another type of b
 The building might need resources that are converted or just takes up space and is slow.
 Electricity might have a simplified logistic system to be distributed across buildings.
 
+```
+Goals:
+	Clean up air
+	Clean up ground
+	Clean up water
+	Once everything is cleaned up, and first dwelling for humans is built = victory
+
+Time:
+	Real time animations but production only updates once every 100 ms.
+
+Building priority setting:
+	the building priority setting can be changed, once the highest priority buildings have received electricity, the next priority group gets electricity, and so on until it moves on until there is no more electricity.
+
+Electricity buildings:
+	solar power plant, desert, the more adjacent desert tiles, the more power
+	solar power is available once the worst pollution is removed (milestone)
+
+	hydroelectric power, river
+	wind power, open field, the less objects in the vicinity, the more powerful
+Electricity is universal, no wiring required.
+
+	
+Recipe:
+Air pollution cleaners: drones that fly and clean the air ( if time allows, animate)
+	require electric circuits + engines
+IC Manufacturing plant:
+	requires silicon + copper
+Silicon mine: resource
+Copper mine: Resource
+```
+
 ## Work to do
 
 - **Map:** we can either handcraft or generate one. Need to find a nice tile set
