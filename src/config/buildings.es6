@@ -18,7 +18,7 @@ import V2 from 'tin-engine/geo/v2';
  =======
  - requires: tile id that it needs to be build on
  - type: type of building: mining, production, power, logistics
- - milestone: required science level 
+ - milestone: required science level
 
 	recipes:
 
@@ -43,9 +43,9 @@ import V2 from 'tin-engine/geo/v2';
 										iron
 							vehicles	iron
 										fuel
-	
+
 	target: build an Soil replenisher.
-	
+
 	Level 2: water
 
 	Level 3: air
@@ -136,8 +136,8 @@ export default {
 		output: {dummy: 1},
 		stack: 20,
 		speed: 100,
-		size: new V2(2, 2),
-		destination: new V2(0, 2),
+		size: new V2(2, 3),
+		destination: new V2(0, 3),
 		milestone: 0
 	},
 	conveyor: {

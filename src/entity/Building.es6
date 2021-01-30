@@ -4,12 +4,26 @@ import ImageEntity from 'tin-engine/basic/image';
 import Inventory from './Inventory';
 import Morph from 'tin-engine/basic/morph';
 import Item from './Item';
+import V2 from 'tin-engine/geo/v2';
+
+function rotate(r, v) {
+	return [
+		v => v,
+		v => new V2(v.y, -v.x),
+		v => new V2(-v.x, -v.y),
+		v => new V2(-v.y, -v.x),
+	][r](v);
+}
 
 export default class Building extends Entity {
-	constructor(pos, grid, rotation, definition) {
+	constructor(pos, grid, rota, definition) {
 		super(pos);
 
+		// translate the destination
+		// maybe collect the closest tile within the destination to be the origin
 		this.dest = grid.sum(definition.destination);
+		this.rota = rota;
+
 		this.inv = new Inventory();
 		this.def = definition;
 		this.processing = 0;
@@ -21,6 +35,23 @@ export default class Building extends Entity {
 		} else {
 			this.add(new ImageEntity(null, definition.image));
 		}
+	}
+
+	draw(ctx) {
+		ctx.save();
+		ctx.translate(this.position.x, this.position.y);
+
+		// Do rotation stuff here
+		// ctx.rotate(Math.PI * this.rota/2);
+		//
+		// if(this.rota == 1) ctx.translate(this.size.y, 0);
+		// else if(this.rota ==2) ctx.translate(-this.size.x, -this.size.y);
+		// else if(this.rota == 3) ctx.translate(0, this.size.x);
+
+		if (this.onDraw) this.onDraw(ctx);
+		this.dispatch(this.entities, 'draw', ctx);
+
+		ctx.restore();
 	}
 
 	accepts(type) {

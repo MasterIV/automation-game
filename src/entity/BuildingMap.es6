@@ -17,6 +17,7 @@ export default class BuildingMap extends Entity {
 				this.map[x][y] = null;
 		}
 
+		this.rotate = 0;
 		this.selected = null;
 		this.demolish = false;
 	}
@@ -56,8 +57,8 @@ export default class BuildingMap extends Entity {
 
 			const size = this.selected.size;
 			const building = this.selected.type === 'logistics'
-				? new Logistics(pos.prd(t), pos, 0, this.selected)
-				: new Building(pos.prd(t), pos, 0, this.selected);
+				? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
+				: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
 
 			for (let x = 0; x < size.x; x++)
 				for (let y = 0; y < size.y; y++)
@@ -76,7 +77,8 @@ export default class BuildingMap extends Entity {
 		if(this.selected) {
 			const pos = this.relativeMouse().grid(t,t);
 			ctx.fillStyle = this.isValid(pos, this.selected) ? 'rgba(100,100,200,.5)' : 'rgba(200,100,100,.5)';
-			ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.x*t, this.selected.size.y*t)
+			if(this.rotate%2) ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.y*t, this.selected.size.x*t);
+			else ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.x*t, this.selected.size.y*t)
 		}
 	}
 }

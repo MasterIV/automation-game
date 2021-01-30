@@ -6,7 +6,7 @@ export default function Menu(props) {
 	return <div>
 		<button onClick={() => props.buildings.select(buildings.dummy_replicator)}>Mining</button>
 		<button onClick={() => props.buildings.select(buildings.conveyor)}>Production</button>
-		<button>Logistics</button>
+		<button onClick={() => props.buildings.rotate++}>Logistics</button>
 		<button>Resources</button>
 	</div>;
 }
