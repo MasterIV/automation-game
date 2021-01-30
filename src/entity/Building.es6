@@ -21,7 +21,7 @@ export default class Building extends Rotateable {
 			position: this.position
 		}, this.def.speed, null, () => {
 			this.inv.add({[item.type]: 1});
-			item.remove();
+			item.parent.remove(item);
 		}))
 	}
 
@@ -46,7 +46,6 @@ export default class Building extends Rotateable {
 			if(this.processing < 1) {
 				// complete production
 				this.inv.add(this.def.output);
-				console.log(this.inv);
 			}
 		} else if(this.def.production && !this.full()) {
 			if(!this.def.input || this.inv.has(this.def.input)) {

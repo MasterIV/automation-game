@@ -30,6 +30,10 @@ export default class BuildingMap extends Entity {
 		return this.map[x] && this.map[x][y];
 	}
 
+	tileAt(x, y) {
+		return this.resources.data[x + (y * this.resources.width)]
+	}
+
 	isValid(pos, definition) {
 		const size = definition.size;
 		let has_required = !definition.required;
@@ -43,7 +47,7 @@ export default class BuildingMap extends Entity {
 				if (this.buildingAt(pos.x + x, pos.y + y))
 					return false;
 
-				const tile = this.resources.data[pos.x + x + ((pos.y + y) * this.resources.width)];
+				const tile = this.tileAt(pos.x + x, pos.y + y);
 				if (tile !== 0 && tile !== definition.required)
 					return false;
 
@@ -53,32 +57,45 @@ export default class BuildingMap extends Entity {
 		return has_required;
 	}
 
+
+
+	build(pos) {
+		// check and deduct resources
+
+		const size = this.selected.size;
+		const building = this.selected.type === 'logistics'
+			? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
+			: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
+
+
+		for (let a = 0; a < size.x; a++)
+			for (let b = 0; b < size.y; b++) {
+				let x,y;
+				if(this.rotate%2) { x=b; y=a; }
+				else { x=a; y=b; }
+
+				if(!this.map[pos.x+x])
+					this.map[pos.x+x] = [];
+				this.map[pos.x+x][pos.y+y] = building;
+			}
+
+		this.add(building);
+	}
+
 	onClick(pos) {
 		pos.grid(t,t);
+		const building = this.buildingAt(pos.x, pos.y);
+		const tile = this.tileAt(pos.x, pos.y);
 
 		if(this.selected && this.isValid(pos, this.selected)) {
-			// check and deduct resources
-
-			const size = this.selected.size;
-			const building = this.selected.type === 'logistics'
-				? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
-				: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
-
-
-			for (let a = 0; a < size.x; a++)
-				for (let b = 0; b < size.y; b++) {
-					let x,y;
-					if(this.rotate%2) { x=b; y=a; }
-					else { x=a; y=b; }
-
-					this.map[pos.x+x][pos.y+y] = building;
-				}
-
-			this.add(building);
-		}
-
-		if(this.demolish && this.buildingAt(pos.x, pos.y)) {
-
+			this.build(pos);
+		} else if(this.demolish && building) {
+			// remove building
+			// refund building cost
+		} else if(this.setBuilding && building) {
+			this.setBuilding(building);
+		} else if(tile) {
+			// collect res
 		}
 	}
 
