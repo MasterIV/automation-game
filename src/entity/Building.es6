@@ -8,6 +8,8 @@ export default class Building extends Rotateable {
 		super(pos, grid, rota, definition);
 		this.inv = new Inventory();
 		this.processing = 0;
+
+		this.definition = definition;
 	}
 
 	accepts(type) {

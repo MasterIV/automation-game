@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import Animation from '../entity/Animation';
 
 export default class GameScene extends Scene {
-	constructor() {
+	constructor(isDemo=false) {
 		super();
 		this.setSize(config.screen.w, config.screen.h);
 		// this.bg = 'img/title.png';
@@ -23,6 +23,11 @@ export default class GameScene extends Scene {
 		viewport.add(buildings);
 		this.add(viewport);
 
+		this.isDemo = isDemo;	
+		if(isDemo) {
+			console.log("Demo testing mode...");
+			buildings.onDemoMode();
+		}
 		ReactDOM.render(
 			React.createElement(Menu, {buildings}),
 			document.getElementById('ui'));

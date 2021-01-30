@@ -2,6 +2,10 @@ import Entity from 'tin-engine/basic/entity';
 import Building from './Building';
 import Logistics from './Logistics';
 
+// for demo mode
+import V2 from 'tin-engine/geo/v2';
+import BUILDINGS from '../config/buildings';
+
 const t = 32;
 
 export default class BuildingMap extends Entity {
@@ -17,7 +21,7 @@ export default class BuildingMap extends Entity {
 				this.map[x][y] = null;
 		}
 
-		this.rotate = 2;
+		this.rotate = 0;
 		this.selected = null;
 		this.demolish = false;
 	}
@@ -67,6 +71,7 @@ export default class BuildingMap extends Entity {
 			? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
 			: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
 
+		console.log("pos: ", pos);
 
 		for (let a = 0; a < size.x; a++)
 			for (let b = 0; b < size.y; b++) {
@@ -80,6 +85,19 @@ export default class BuildingMap extends Entity {
 			}
 
 		this.add(building);
+	}
+	onDemoMode() {
+		let i = 0;
+		for(const key in BUILDINGS) {
+			let x = i * 96;
+			this.select(BUILDINGS[key]);
+			const p = new V2(x, 100);
+			p.grid(t,t);
+			const building = this.buildingAt(p.x + 16, 100);
+			this.build(p);	
+			if(key === "soil_replenisher") i++;
+			i++;
+		}	
 	}
 
 	onClick(pos) {
