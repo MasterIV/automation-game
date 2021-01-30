@@ -1,7 +1,7 @@
 import V2 from 'tin-engine/geo/v2';
 
 /*
-Building properties:
+ Building properties:
  - name: name of the building
  - description: helpful information about the building function
  - image: image file of the building
@@ -14,12 +14,12 @@ Building properties:
  - speed: milliseconds the building needs to move an item
  - size: V2 defining the size of the building
  - destination: output location for the building relative to its origin point
- 
+
  - type: type of building: mining, production, power, logistics
 
- - milestone: required science level 
+ - milestone: required science level
 
-=======
+ =======
  - requires: tile id that it needs to be build on
 
 
@@ -85,7 +85,7 @@ export default {
 
 // Power supply
 	wind_power: {
-		name:'Wind power plant',
+		name: 'Wind power plant',
 		description: 'Produces electricity from fast moving air.',
 		image: 'img/buildings/dummy_factory.png',
 		type: 'power',
@@ -114,7 +114,7 @@ export default {
 	conveyor: {
 		name: 'Straight Conveyor',
 		description: 'Moves items in a straight line',
-		image: 'img/buildings/conveyor_straight.png',
+		image: 'img/buildings/conveyor_belt.png',
 		frames: 3,
 		type: 'logistics',
 		speed: 200,
