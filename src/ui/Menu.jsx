@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import buildings from '../config/buildings';
+import ConstructionInfo from './ConstructionInfo';
+import InventoryMenu from './InventoryMenu';
+import BuildMenu from './BuildMenu';
 
 export default class Menu extends React.Component{
 	constructor(props) {
@@ -9,17 +11,19 @@ export default class Menu extends React.Component{
 		this.state = {
 			selected: null,
 			building: null,
+			menu: null,
 			demolish: false,
 		};
 
 		this.select = this.select.bind(this);
 		this.demolish = this.demolish.bind(this);
+		this.menu = this.menu.bind(this);
 		props.buildings.setBuilding = building => this.setState({building});
 	}
 
 	select(building) {
 		this.props.buildings.select(building);
-		this.setState({selected: building});
+		this.setState({selected: building, menu: null});
 	}
 
 	demolish(state) {
@@ -27,18 +31,18 @@ export default class Menu extends React.Component{
 		this.setState({demolish: state});
 	}
 
-	render() {
-		if(this.state.building)
-			return <div>
-				<button onClick={() => this.demolish(false)}>cancel</button>
-			</div>;
+	menu(type) {
+		if(this.state.menu === type)
+			type = null;
+		this.setState({menu: type});
+	}
 
+	render() {
 		if(this.state.selected)
-			return <div>
-				<span>{this.state.selected.name}</span>
-				<button onClick={() => this.select(null)}>cancel</button>
-				<button onClick={() => this.props.buildings.rotate++}>Rotate</button>
-			</div>;
+			return <ConstructionInfo
+				building={this.state.selected}
+				onCancel={() => this.select(null)}
+				onRotate={() => this.props.buildings.rotate++} />;
 
 		if(this.state.building)
 			return <div>
@@ -47,11 +51,20 @@ export default class Menu extends React.Component{
 			</div>;
 
 		return <div>
-			<button onClick={() => this.select(buildings.dummy_replicator)}>Mining</button>
-			<button onClick={() => this.select(buildings.conveyor)}>Production</button>
-			<button>Logistics</button>
-			<button>Resources</button>
-			<button onClick={() => this.demolish(true)}>Demolish</button>
+			{this.state.menu === 'inventory' &&
+				<InventoryMenu onClose={() => this.menu(null)}/>}
+
+			{this.state.menu && this.state.menu !== 'inventory' &&
+				<BuildMenu type={this.state.menu} onSelect={this.select} onClose={() => this.menu(null)}/>}
+
+			<button onClick={() => this.menu('mining')}>Mining</button>
+			<button onClick={() => this.menu('production')}>Production</button>
+			<button onClick={() => this.menu('logistics')}>Logistics</button>
+			<button onClick={() => this.menu('inventory')}>Resources</button>
+
+			<button
+				className={this.state.demolish && 'danger'}
+				onClick={() => this.demolish(!this.state.demolish)}>Demolish</button>
 		</div>;
 	}
 }
