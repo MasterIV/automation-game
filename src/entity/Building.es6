@@ -1,5 +1,5 @@
 import Entity from 'tin-engine/basic/entity';
-import Animation from 'tin-engine/lib/animation';
+import Animation from './Animation';
 import ImageEntity from 'tin-engine/basic/image';
 import Inventory from './Inventory';
 
@@ -12,13 +12,19 @@ export default class Building extends Entity {
 		this.processing = 0;
 		this.moving = 0;
 
-		this.add( definition.frames
-			? new Animation(definition.image, null, definition.frames, 200, true)
-			: new ImageEntity(null, definition.image))
+		if(definition.frames) {
+			if(!Animation.groups[definition.image])
+				Animation.add(definition.image, 200, definition.frames);
+			this.add(new Animation(definition.image, definition.image));
+		} else {
+			this.add(new ImageEntity(null, definition.image));
+		}
 	}
 
-	accepts(item) {
-
+	accepts(type) {
+		return (this.def.type === 'storage' && this.inv.size() < this.def.stack) || // storage building
+			   (this.def.input && this.def.input[type] && this.inv.get(type) < this.def.stack) || // production building
+			   (this.def.type === 'logistics' && this.inv.empty()); // logistics building
 	}
 
 	onUpdate(delta) {
@@ -37,7 +43,7 @@ export default class Building extends Entity {
 		}
 
 		if(this.moving > 0) {
-
+			this.moving -= delta;
 		} else if(!this.inv.empty()) {
 
 		}
