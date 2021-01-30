@@ -7,17 +7,17 @@ import V2 from 'tin-engine/geo/v2';
  - image: image file of the building
  - frames: optional, number of frames if the image contains an animation
  - input: number and type of items required for production
- - storage: number of storage slots (storage buildings only)
- - stack: max items per slot
+ - stack: max items per slot / inventory size for storage
  - production: number of milliseconds production takes
  - output: number and type of items generated
  - speed: milliseconds the building needs to move an item
  - size: V2 defining the size of the building
  - destination: output location for the building relative to its origin point
-
- =======
  - requires: tile id that it needs to be build on
  - type: type of building: mining, production, power, logistics
+ - cost: items required to build this
+
+ =======
  - milestone: required science level
 
 
@@ -196,10 +196,11 @@ export default {
 		speed: 100,
 		size: new V2(2, 3),
 		destination: new V2(0, 3),
-		milestone: 0
+		milestone: 0,
+		cost: {dummy: 1}
 	},
 	conveyor: {
-		name: 'Straight Conveyor',
+		name: 'Conveyor',
 		description: 'Moves items in a straight line',
 		image: 'img/buildings/conveyor_belt.png',
 		frames: 3,

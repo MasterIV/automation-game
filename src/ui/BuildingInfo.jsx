@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-export default function InventoryMenu({children}) {
+export default function BuildingInfo({children}) {
 	return children;
 }
 
-InventoryMenu.propTypes = {
+BuildingInfo.propTypes = {
 	children: PropTypes.node,
 };
 
-InventoryMenu.defaultProps = {};
+BuildingInfo.defaultProps = {};
 
