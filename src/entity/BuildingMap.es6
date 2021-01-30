@@ -17,7 +17,7 @@ export default class BuildingMap extends Entity {
 				this.map[x][y] = null;
 		}
 
-		this.rotate = 0;
+		this.rotate = 3;
 		this.selected = null;
 		this.demolish = false;
 	}

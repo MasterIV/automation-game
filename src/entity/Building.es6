@@ -39,10 +39,10 @@ export default class Building extends Entity {
 
 	draw(ctx) {
 		ctx.save();
-		ctx.translate(this.position.x, this.position.y);
+		ctx.translate(this.position.x + this.size.x, this.position.y + this.size.y);
 
 		// Do rotation stuff here
-		// ctx.rotate(Math.PI * this.rota/2);
+		ctx.rotate(Math.PI * this.rota/2);
 		//
 		// if(this.rota == 1) ctx.translate(this.size.y, 0);
 		// else if(this.rota ==2) ctx.translate(-this.size.x, -this.size.y);
