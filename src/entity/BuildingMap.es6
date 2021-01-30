@@ -75,7 +75,6 @@ export default class BuildingMap extends Entity {
 				}
 
 			this.add(building);
-			this.selected = null;
 		}
 
 		if(this.demolish && this.buildingAt(pos.x, pos.y)) {

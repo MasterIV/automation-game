@@ -4,16 +4,28 @@
 import Entity from 'tin-engine/basic/entity';
 import Animation from './Animation';
 import ImageEntity from 'tin-engine/basic/image';
+import V2 from 'tin-engine/geo/v2';
+
+function rotate(r, v, s) {
+	for(let i=0; i<r;i++)
+		v = new V2(-v.y, v.x);
+
+	if(r==1) return v.sum(new V2(s.y-1,0));
+	else if(r==2) return v.sum(new V2(s.x-1, s.y-1));
+	else if(r==3) return v.sum(new V2(0, s.x-1));
+	else return v;
+}
 
 export default class Rotateable extends Entity {
 	constructor(pos, grid, rota, definition) {
 		super(pos);
 
-		// translate the destination
-		// maybe collect the closest tile within the destination to be the origin
-		this.dest = grid.sum(definition.destination);
 		this.def = definition;
 		this.rota = rota;
+
+		const offset = rotate(rota, definition.destination, definition.size);
+		console.log(offset);
+		this.dest = grid.sum(offset);
 
 		if(definition.frames) {
 			if(!Animation.groups[definition.image])
@@ -25,6 +37,10 @@ export default class Rotateable extends Entity {
 
 		this.img.position = this.img.size.quo(-2);
 		this.add(this.img);
+	}
+
+	closest(pos) {
+
 	}
 
 	draw(ctx) {

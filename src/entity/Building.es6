@@ -1,17 +1,7 @@
 import Inventory from './Inventory';
 import Morph from 'tin-engine/basic/morph';
 import Item from './Item';
-import V2 from 'tin-engine/geo/v2';
 import Rotateable from './Rotateable';
-
-function rotate(r, v) {
-	return [
-		v => v,
-		v => new V2(v.y, -v.x),
-		v => new V2(-v.x, -v.y),
-		v => new V2(-v.y, -v.x),
-	][r](v);
-}
 
 export default class Building extends Rotateable {
 	constructor(pos, grid, rota, definition) {
