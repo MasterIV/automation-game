@@ -139,7 +139,7 @@ export default {
 		size: new V2(2, 3),
 		destination: new V2(0, 3),
 		milestone: 0,
-		cost: {dummy: 1}
+		cost: {wood: 1}
 	},
 	conveyor: {
 		name: 'Conveyor',
@@ -149,6 +149,7 @@ export default {
 		type: 'logistics',
 		speed: 200,
 		size: new V2(1, 1),
-		destination: new V2(1, 0)
+		destination: new V2(1, 0),
+		cost: {stone: 1}
 	}
 };

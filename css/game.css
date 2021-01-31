@@ -50,6 +50,11 @@ body {
 
 }
 
+.item {
+	display: inline-block;
+	margin: 0 8px;
+}
+
 .building {
 	cursor: pointer;
 	display: inline-block;

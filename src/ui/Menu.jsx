@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ConstructionInfo from './ConstructionInfo';
+import BuildingInfo from './BuildingInfo';
 import InventoryMenu from './InventoryMenu';
 import BuildMenu from './BuildMenu';
 
@@ -45,10 +46,10 @@ export default class Menu extends React.Component{
 				onRotate={() => this.props.buildings.rotate++} />;
 
 		if(this.state.building)
-			return <div>
-				<span>{this.state.building.def.name}</span>
-				<button onClick={() => this.setState({building: null})}>cancel</button>
-			</div>;
+			return <BuildingInfo
+				building={this.state.building}
+				onCancel={() => this.setState({building: null})}
+				onCollect={type => this.props.buildings.collect(this.state.building, type)} />;
 
 		return <div>
 			{this.state.menu === 'inventory' &&

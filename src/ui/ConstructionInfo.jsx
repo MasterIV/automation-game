@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ItemList from './ItemList';
 
 export default function ConstructionInfo({building, onCancel, onRotate}) {
 	return <div className="construction-info">

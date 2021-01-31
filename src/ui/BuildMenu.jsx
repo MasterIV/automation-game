@@ -20,7 +20,7 @@ export default function BuildMenu({type, onSelect, onClose}) {
 				<div className="description">{b.description}</div>
 
 				{b.cost && <ItemList title='Cost' item={b.cost} />}
-				{b.output && <ItemList title='Input' item={b.output} />}
+				{b.output && <ItemList title='Output' item={b.output} />}
 				{b.input && <ItemList title='Input' item={b.input} />}
 			</div>)}
 	</div>;

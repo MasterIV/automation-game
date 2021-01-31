@@ -41,6 +41,12 @@ export default class BuildingMap extends Entity {
 		return this.resources.data[x + (y * this.resources.width)]
 	}
 
+	collect(building, type) {
+		const items = {[type]: building.inv.get(type)};
+		building.inv.remove(items);
+		state.inventory.add(items);
+	}
+
 	isValid(pos, definition) {
 		const size = definition.size;
 		let has_required = !definition.required;
@@ -63,8 +69,6 @@ export default class BuildingMap extends Entity {
 
 		return has_required;
 	}
-
-
 
 	build(pos) {
 		// check and deduct resources
