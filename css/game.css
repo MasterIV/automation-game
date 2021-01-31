@@ -112,6 +112,11 @@ fieldset {
 	text-align: center;
 }
 
+fieldset.error {
+	border-color: #AA0000;
+	color: #AA0000;
+}
+
 legend {
 	font-size: 12px;
 }

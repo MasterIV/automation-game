@@ -19,7 +19,7 @@ export default function BuildMenu({type, onSelect, onClose}) {
 				<div className="preview" style={{backgroundImage:`url(${b.image})`}}></div>
 				<div className="description">{b.description}</div>
 
-				{b.cost && <ItemList title='Cost' item={b.cost} />}
+				{b.cost && <ItemList title='Cost' item={b.cost} error={!state.inventory.has(b.cost)} />}
 				{b.output && <ItemList title='Output' item={b.output} />}
 				{b.input && <ItemList title='Input' item={b.input} />}
 			</div>)}
