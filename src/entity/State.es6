@@ -17,7 +17,7 @@ function checkMilestone() {
 
 const state = {
 	inventory: new Inventory(checkMilestone),
-	unlocks: [],
+	unlocks: ['lumberjack', 'quarry', 'sawmill', 'stone_cutter', 'conveyor', 'iron_mine', 'iron_smelter', 'crate_factory', 'gear_factory', 'copper_mine', 'copper_smelter', 'wire_factory', 'magnet_factory', 'catapult'],
 	milestone: 0,
 	current: () => milestones[state.milestone],
 };
