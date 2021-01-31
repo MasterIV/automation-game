@@ -5,6 +5,7 @@ import config from './config/config';
 import TitleScene from './scenes/TitleScene';
 import items from './config/items';
 import buildings from './config/buildings';
+import GameScene from './scenes/GameScene';
 
 window.onload = () => {
 	// preload graphics here
@@ -15,15 +16,22 @@ window.onload = () => {
 
 	// Title screen
 	graphics.add("img/title.png");
+	graphics.add("img/aboutscreen.png");
+	graphics.add("img/helpscreen.png");
+
+// buttons
 	graphics.add("img/button_play.png");
 	graphics.add("img/button_credits.png");
 	graphics.add("img/button_help.png");
+	graphics.add("img/button_back.png");
+	graphics.add("img/button_demo.png");
 
 	graphics.load(() => {
 		document.getElementById('loading').style.display = 'none';
-
 		const game = new Game(config);
 		mouse.init(game);
+		// comment to skip titlescreen
 		game.run(new TitleScene());
+		// game.run(new GameScene(true));
 	});
 };

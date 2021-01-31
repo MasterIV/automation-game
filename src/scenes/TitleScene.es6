@@ -3,6 +3,7 @@ import V2 from 'tin-engine/geo/v2';
 import config from '../config/config';
 import Button from 'tin-engine/basic/button';
 import GameScene from './GameScene';
+import HelpScene from './HelpScene';
 import CreditsScene from './CreditsScene';
 import {VerticalLayout} from 'tin-engine/basic/layout';
 
@@ -23,9 +24,12 @@ export default class TitleScene extends Scene {
 
 		// const creditsButton = Button.create(new V2(208, 404), () => this.parent.goto(new CreditsScene())).rect(200, 50).text('Credits');
 		// const helpButton = Button.create(new V2(249, 363), () => window.open('https://github.com/MasterIV/automation-game')).rect(200, 50).text('Help');
+		// const helpButton = Button.create(new V2(249, 363), () => window.open('https://github.com/MasterIV/automation-game')).img("img/button_help.png", 1);
+		const helpButton = Button.create(new V2(249, 363), () => this.parent.goto(new HelpScene())).img("img/button_help.png", 1);
 		const creditsButton = Button.create(new V2(208, 404), () => this.parent.goto(new CreditsScene())).img("img/button_credits.png", 1);
-		const helpButton = Button.create(new V2(249, 363), () => window.open('https://github.com/MasterIV/automation-game')).img("img/button_help.png", 1);
+		const demoButton = Button.create(new V2(208, 404), () => this.parent.goto(new GameScene(true))).img("img/button_demo.png", 1);
 
+		layout.add(demoButton);
 		layout.add(playButton);
 		layout.add(helpButton);
 		layout.add(creditsButton);
