@@ -181,7 +181,7 @@ export default {
 		stack: 20,
 		speed: 100,
 		size: new V2(1, 1),
-		destination: new V2(0, 2),
+		destination: new V2(0, 1),
 		milestone: 0
 	},
 
@@ -200,7 +200,7 @@ export default {
 		cost: {dummy: 1}
 	},
 	conveyor: {
-		name: 'Conveyor',
+		name: 'Conveyor belt',
 		description: 'Moves items in a straight line',
 		image: 'img/buildings/conveyor_belt.png',
 		frames: 3,
