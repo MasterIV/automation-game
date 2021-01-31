@@ -33,7 +33,8 @@ export default class BuildingMap extends Entity {
 
 	select(type) {
 		this.selected = type;
-		this.destination = rotate(this.rotation%4, this.selected.destination, this.selected.size);
+		if(type)
+			this.destination = rotate(this.rotation%4, this.selected.destination, this.selected.size);
 	}
 
 	rotate() {
@@ -59,7 +60,7 @@ export default class BuildingMap extends Entity {
 
 	isValid(pos, definition) {
 		const size = definition.size;
-		let has_required = !definition.required;
+		let has_required = !definition.requires;
 
 		for (let a = 0; a < size.x; a++)
 			for (let b = 0; b < size.y; b++) {
@@ -71,10 +72,10 @@ export default class BuildingMap extends Entity {
 					return false;
 
 				const tile = this.tileAt(pos.x + x, pos.y + y);
-				if (tile !== 0 && tile !== definition.required)
+				if (tile !== 0 && tile !== definition.requires)
 					return false;
 
-				has_required = has_required || tile === definition.required;
+				has_required = has_required || tile === definition.requires;
 			}
 
 		return has_required && state.inventory.has(this.selected.cost);

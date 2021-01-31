@@ -19,10 +19,6 @@ import items from './items';
  - cost: items required to build this
  =======
 
-
-
- 'copper_mine', 'copper_smelter', 'wire_factory', 'magnet_factory', 'catapult'
- 'coal_mine', 'titan_mine', 'titan_smelter', 'relay_factory'
  */
 
 export default {

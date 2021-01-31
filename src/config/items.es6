@@ -1,10 +1,10 @@
 export default {
 	wood: {image: 'img/items/wood.png', name: 'Wood', tile: 2},
-	stone: {image: 'img/items/stone.png', name: 'Stone', tile: 7},
-	coal: {image: 'img/items/coal.png', name: 'Coal', tile: 8},
-	iron_ore: {image: 'img/items/iron_ore.png', name: 'Iron Ore', tile: 3},
-	copper_ore: {image: 'img/items/copper_ore.png', name: 'Copper Ore', tile: 4},
-	gold_ore: {image: 'img/items/gold_ore.png', name: 'Gold Ore', tile: 5},
+	stone: {image: 'img/items/stone.png', name: 'Stone', tile: 3},
+	coal: {image: 'img/items/coal.png', name: 'Coal', tile: 7},
+	iron_ore: {image: 'img/items/iron_ore.png', name: 'Iron Ore', tile: 4},
+	copper_ore: {image: 'img/items/copper_ore.png', name: 'Copper Ore', tile: 5},
+	gold_ore: {image: 'img/items/gold_ore.png', name: 'Gold Ore', tile: 8},
 	titan_ore: {image: 'img/items/titan_ore.png', name: 'Titan Ore', tile: 6},
 
 	plank: {image: 'img/items/plank.png', name: 'Plank'},
