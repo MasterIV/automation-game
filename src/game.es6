@@ -35,7 +35,7 @@ window.onload = () => {
 		const game = new Game(config);
 		mouse.init(game);
 		// comment to skip titlescreen
-		// game.run(new TitleScene());
-		game.run(new GameScene(true));
+		game.run(new TitleScene());
+		// game.run(new GameScene(true));
 	});
 };
