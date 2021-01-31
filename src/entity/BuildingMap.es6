@@ -68,7 +68,31 @@ export default class BuildingMap extends Entity {
 		return has_required;
 	}
 
+	demolishB(building) {
+		console.log("demolish: ");
+		console.log(building);
+		const size = building.size;
+		// const building = this.selected.type === 'logistics'
+			// # ? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
+			// # : new Building(pos.prd(t), pos, this.rotate%4, this.selected);
 
+		const pos = building.position;
+		// console.log("pos: ", pos);
+
+		for (let a = 0; a < size.x; a++)
+			for (let b = 0; b < size.y; b++) {
+				let x,y;
+				if(this.rotate%2) { x=b; y=a; }
+				else { x=a; y=b; }
+
+				if(!this.map[pos.x+x])
+					this.map[pos.x+x] = [];
+				this.map[pos.x+x][pos.y+y] = null;
+			}
+
+		this.remove(building);
+	}
+		
 
 	build(pos) {
 		// check and deduct resources
@@ -78,7 +102,7 @@ export default class BuildingMap extends Entity {
 			? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
 			: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
 
-		console.log("pos: ", pos);
+		// console.log("pos: ", pos);
 
 		for (let a = 0; a < size.x; a++)
 			for (let b = 0; b < size.y; b++) {
