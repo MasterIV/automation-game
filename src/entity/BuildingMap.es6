@@ -1,6 +1,8 @@
 import Entity from 'tin-engine/basic/entity';
 import Building from './Building';
 import Logistics from './Logistics';
+import state from './State';
+import items from '../config/items';
 
 // for demo mode
 import V2 from 'tin-engine/geo/v2';
@@ -24,6 +26,11 @@ export default class BuildingMap extends Entity {
 		this.rotate = 0;
 		this.selected = null;
 		this.demolish = false;
+
+		this.collectibles = {};
+		for(let i in items )
+			if(items[i].tile)
+				this.collectibles[items[i].tile] = i;
 	}
 
 	select(type) {
@@ -112,8 +119,9 @@ export default class BuildingMap extends Entity {
 			// refund building cost
 		} else if(this.setBuilding && building) {
 			this.setBuilding(building);
-		} else if(tile) {
-			// collect res
+		} else if(tile && this.collectibles[tile]) {
+			// show collect animation
+			state.inventory.add({[this.collectibles[tile]]: 1});
 		}
 	}
 

@@ -1,13 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ItemList from './ItemList';
+import state from '../entity/State';
 
 
-export default function InventoryMenu({children}) {
-	return children;
+export default function InventoryMenu({onClose}) {
+	return <div className="menu-window">
+		<div className="headline">
+			<span>Inventory</span>
+			<button onClick={onClose}>Close</button>
+		</div>
+
+		<ItemList title="Inventory Items" item={state.inventory.items} />
+
+		<div className="headline">
+			<span>Next milestone</span>
+		</div>
+
+		tbd
+	</div>;
 }
 
 InventoryMenu.propTypes = {
-	children: PropTypes.node,
+	onClose: PropTypes.func,
 };
 
 InventoryMenu.defaultProps = {};
