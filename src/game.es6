@@ -26,12 +26,16 @@ window.onload = () => {
 	graphics.add("img/button_back.png");
 	graphics.add("img/button_demo.png");
 
+// testing
+	graphics.add("img/robot.png");
+	graphics.add("img/vehicle.png");
+
 	graphics.load(() => {
 		document.getElementById('loading').style.display = 'none';
 		const game = new Game(config);
 		mouse.init(game);
 		// comment to skip titlescreen
-		game.run(new TitleScene());
-		// game.run(new GameScene(true));
+		// game.run(new TitleScene());
+		game.run(new GameScene(true));
 	});
 };
