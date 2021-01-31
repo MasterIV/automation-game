@@ -101,6 +101,10 @@ body {
 
 }
 
+.inventory > fieldset {
+	margin: 5px 30px;
+}
+
 fieldset {
 	padding: 4px;
 	line-height: 13px;

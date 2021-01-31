@@ -5,7 +5,9 @@ import state from '../entity/State';
 
 
 export default function InventoryMenu({onClose}) {
-	return <div className="menu-window">
+	const milestone = state.current();
+
+	return <div className="menu-window inventory">
 		<div className="headline">
 			<span>Inventory</span>
 			<button onClick={onClose}>Close</button>
@@ -17,7 +19,9 @@ export default function InventoryMenu({onClose}) {
 			<span>Next milestone</span>
 		</div>
 
-		tbd
+		<p>{milestone.description}</p>
+
+		<ItemList title="Requirements" item={milestone.requirement} />
 	</div>;
 }
 

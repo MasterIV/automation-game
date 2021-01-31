@@ -3,10 +3,11 @@ import Building from './Building';
 import Logistics from './Logistics';
 import state from './State';
 import items from '../config/items';
-
-// for demo mode
+import {rotate} from './Rotateable';
 import V2 from 'tin-engine/geo/v2';
 import BUILDINGS from '../config/buildings';
+
+// for demo mode
 
 const t = 32;
 
@@ -23,7 +24,7 @@ export default class BuildingMap extends Entity {
 				this.map[x][y] = null;
 		}
 
-		this.rotate = 0;
+		this.rotation = 0;
 		this.selected = null;
 		this.demolish = false;
 
@@ -35,6 +36,14 @@ export default class BuildingMap extends Entity {
 
 	select(type) {
 		this.selected = type;
+		this.destination = rotate(this.rotation%4, this.selected.destination, this.selected.size);
+	}
+
+	rotate() {
+		this.rotation++;
+		if(this.selected) {
+			this.destination = rotate(this.rotation%4, this.selected.destination, this.selected.size);
+		}
 	}
 
 	buildingAt(x, y) {
@@ -58,7 +67,7 @@ export default class BuildingMap extends Entity {
 		for (let a = 0; a < size.x; a++)
 			for (let b = 0; b < size.y; b++) {
 				let x,y;
-				if(this.rotate%2) { x=b; y=a; }
+				if(this.rotation%2) { x=b; y=a; }
 				else { x=a; y=b; }
 
 				if (this.buildingAt(pos.x + x, pos.y + y))
@@ -71,23 +80,21 @@ export default class BuildingMap extends Entity {
 				has_required = has_required || tile === definition.required;
 			}
 
-		return has_required;
+		return has_required && state.inventory.has(this.selected.cost);
 	}
 
 	build(pos) {
-		// check and deduct resources
+		state.inventory.remove(this.selected.cost);
 
 		const size = this.selected.size;
 		const building = this.selected.type === 'logistics'
-			? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
-			: new Building(pos.prd(t), pos, this.rotate%4, this.selected);
-
-		console.log("pos: ", pos);
+			? new Logistics(pos.prd(t), pos, this.rotation%4, this.selected)
+			: new Building(pos.prd(t), pos, this.rotation%4, this.selected);
 
 		for (let a = 0; a < size.x; a++)
 			for (let b = 0; b < size.y; b++) {
 				let x,y;
-				if(this.rotate%2) { x=b; y=a; }
+				if(this.rotation%2) { x=b; y=a; }
 				else { x=a; y=b; }
 
 				if(!this.map[pos.x+x])
@@ -97,6 +104,7 @@ export default class BuildingMap extends Entity {
 
 		this.add(building);
 	}
+
 	onDemoMode() {
 		let i = 0;
 		for(const key in BUILDINGS) {
@@ -105,10 +113,10 @@ export default class BuildingMap extends Entity {
 			const p = new V2(x, 100);
 			p.grid(t,t);
 			const building = this.buildingAt(p.x + 16, 100);
-			this.build(p);	
+			this.build(p);
 			if(key === "soil_replenisher") i++;
 			i++;
-		}	
+		}
 	}
 
 	onClick(pos) {
@@ -133,8 +141,12 @@ export default class BuildingMap extends Entity {
 		if(this.selected) {
 			const pos = this.relativeMouse().grid(t,t);
 			ctx.fillStyle = this.isValid(pos, this.selected) ? 'rgba(100,100,200,.5)' : 'rgba(200,100,100,.5)';
-			if(this.rotate%2) ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.y*t, this.selected.size.x*t);
-			else ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.x*t, this.selected.size.y*t)
+			if(this.rotation%2) ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.y*t, this.selected.size.x*t);
+			else ctx.fillRect(pos.x*t, pos.y*t, this.selected.size.x*t, this.selected.size.y*t);
+
+			// output preview
+			ctx.fillStyle = 'rgba(100,200,100,.5)';
+			ctx.fillRect((pos.x+this.destination.x)*t+6, (pos.y+this.destination.y)*t+6,20, 20);
 		}
 	}
 }

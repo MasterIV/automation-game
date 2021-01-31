@@ -43,7 +43,7 @@ export default class Menu extends React.Component{
 			return <ConstructionInfo
 				building={this.state.selected}
 				onCancel={() => this.select(null)}
-				onRotate={() => this.props.buildings.rotate++} />;
+				onRotate={() => this.props.buildings.rotate()} />;
 
 		if(this.state.building)
 			return <BuildingInfo
