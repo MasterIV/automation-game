@@ -1,12 +1,17 @@
 export default class Inventory {
-	constructor() {
+	constructor(listener) {
 		this.items = {};
+		this.listener = listener;
 	}
 
 	add(items) {
 		if(!items) return;
+
 		for(let i in items)
 			this.items[i] = (this.items[i]|0) +  items[i];
+
+		if(this.listener)
+			this.listener(this.items);
 	}
 
 	has(items) {
@@ -20,8 +25,12 @@ export default class Inventory {
 
 	remove(items) {
 		if(!items) return;
+		
 		for(let i in items)
 			this.items[i] = (this.items[i]|0) - items[i];
+
+		if(this.listener)
+			this.listener(this.items);
 	}
 
 	empty() {

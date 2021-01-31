@@ -12,7 +12,7 @@ export default function ItemList({item, title}) {
 }
 
 ItemList.propTypes = {
-	items: PropTypes.object,
+	item: PropTypes.object,
 	title: PropTypes.string,
 };
 

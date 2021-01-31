@@ -6,7 +6,7 @@ import Animation from './Animation';
 import ImageEntity from 'tin-engine/basic/image';
 import V2 from 'tin-engine/geo/v2';
 
-function rotate(r, v, s) {
+export function rotate(r, v, s) {
 	for(let i=0; i<r;i++)
 		v = new V2(-v.y, v.x);
 
@@ -37,10 +37,6 @@ export default class Rotateable extends Entity {
 
 		this.img.position = this.img.size.quo(-2);
 		this.add(this.img);
-	}
-
-	closest(pos) {
-
 	}
 
 	draw(ctx) {
