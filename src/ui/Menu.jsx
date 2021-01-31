@@ -37,8 +37,6 @@ export default class Menu extends React.Component{
 	}
 	demolishBuilding() {
 		const b = this.state.building;
-		console.log("b", b);
-		console.log(b.parent);
 		b.parent.demolishB(this.state.building);
 		this.unselect();
 	}
