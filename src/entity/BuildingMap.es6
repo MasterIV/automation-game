@@ -12,7 +12,6 @@ const t = 32;
 export default class BuildingMap extends Entity {
 	constructor(map) {
 		super(null, map.size);
-
 		this.map = [];
 		this.resources = map.getLayer('resources');
 
@@ -83,8 +82,8 @@ export default class BuildingMap extends Entity {
 
 	demolishB(building) {
 		const size = building.size;
-			// # ? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
-			// # : new Building(pos.prd(t), pos, this.rotate%4, this.selected);
+		// # ? new Logistics(pos.prd(t), pos, this.rotate%4, this.selected)
+		// # : new Building(pos.prd(t), pos, this.rotate%4, this.selected);
 
 		const pos = building.position;
 
@@ -120,7 +119,6 @@ export default class BuildingMap extends Entity {
 					this.map[pos.x+x] = [];
 				this.map[pos.x+x][pos.y+y] = building;
 			}
-
 		this.add(building);
 	}
 

@@ -8,7 +8,7 @@ export default function DemolishMenu({building, type, onSelect, onClose, unselec
 	console.log(building);
 	if(building) {
 		return <div>
-		<span>Do you really want to demolish the {building.definition.name}? <button onClick={demolishBuilding}>Yes</button><button onClick={unselect}>No</button></span>
+		<span>Do you really want to demolish the {building.def.name}? <button onClick={demolishBuilding}>Yes</button><button onClick={unselect}>No</button></span>
 		</div>;
 	}
 	return <div>
