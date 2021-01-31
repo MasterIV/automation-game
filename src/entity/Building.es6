@@ -6,27 +6,8 @@ import Rotateable from './Rotateable';
 export default class Building extends Rotateable {
 	constructor(pos, grid, rota, definition) {
 		super(pos, grid, rota, definition);
-		super(pos);
-		console.log("building: ", pos);
-		console.log("building: ", this.position);
-
-		// translate the destination
-		// maybe collect the closest tile within the destination to be the origin
-		 this.dest = grid.sum(definition.destination);
-		this.rota = rota;
-
 		this.inv = new Inventory();
 		this.processing = 0;
-		
-		this.definition = definition;
-
-		if(definition.frames) {
-			if(!Animation.groups[definition.image])
-				Animation.add(definition.image, 200, definition.frames);
-			this.add(new Animation(definition.image, definition.image));
-		} else {
-			this.add(new ImageEntity(null, definition.image));
-		}
 	}
 
 	draw(ctx) {
