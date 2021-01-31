@@ -58,6 +58,20 @@ export default {
 		destination: new V2(0, 2),
 		milestone: 0
 	},
+	test_mine: {
+		name: 'Test Mine',
+		description: 'Test animations.',
+		image: 'img/plus.png',
+		type: 'mining',
+		production: 500,
+		output: {hydrogen: 1},
+		stack: 20,
+		speed: 100,
+		frames: 8,
+		size: new V2(1, 1),
+		destination: new V2(0, 2),
+		milestone: 0
+},
 	hydrogen_mine: {
 		name: 'Hydrogen Mine',
 		description: 'Extracts hydrogen, an efficient fuel.',
