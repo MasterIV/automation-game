@@ -73,10 +73,10 @@ export default class Menu extends React.Component{
 			{this.state.menu && this.state.menu !== 'inventory' &&
 				<BuildMenu type={this.state.menu} demolishBuilding={() => this.demolishBuilding()} onSelect={this.select} onClose={() => this.menu(null)}/>}
 
+			<button onClick={() => this.menu('inventory')}>Progress</button>
 			<button onClick={() => this.menu('mining')}>Mining</button>
 			<button onClick={() => this.menu('production')}>Production</button>
 			<button onClick={() => this.menu('logistics')}>Logistics</button>
-			<button onClick={() => this.menu('inventory')}>Resources</button>
 			<button onClick={() => this.menu('demolish')}>Demolish</button>
 
 		</div>;

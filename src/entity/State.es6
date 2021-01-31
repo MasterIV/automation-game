@@ -6,7 +6,10 @@ function checkMilestone() {
 
 	if(state.inventory.has(current.requirement)) {
 		state.inventory.remove(current.requirement);
+
+		current.unlocks.forEach(u => state.unlocks.push(u));
 		state.milestone++;
+
 		if(state.callback)
 			state.callback(state.current());
 	}
@@ -14,7 +17,7 @@ function checkMilestone() {
 
 const state = {
 	inventory: new Inventory(checkMilestone),
-	unlocks: ['dummy_replicator', 'conveyor'],
+	unlocks: [],
 	milestone: 0,
 	current: () => milestones[state.milestone],
 };

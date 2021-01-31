@@ -1,10 +1,5 @@
 export default [
 	{
-		description: 'This is the dummy milestone',
-		requirement: {wood:5},
-		unlocks: ['conveyor'],
-	},
-	{
 		description: 'Find the required resources on the map and click them to collect them.',
 		requirement: {wood:5, iron_ore:5, copper_ore: 5, stone:5},
 		unlocks: ['lumberjack', 'quarry'],
@@ -17,7 +12,7 @@ export default [
 	{
 		description: 'Place processing buildings at the output of your mining buildings to process resources automatically.',
 		requirement: {plank: 50, cut_stone: 50},
-		unlocks: ['conveyor', 'iron_mine', 'iron_smelter', 'crate_factory'],
+		unlocks: ['conveyor', 'iron_mine', 'iron_smelter', 'crate_factory', 'gear_factory'],
 	},
 	{
 		description: 'Some items will need multiple inputs to produce, you can use conveyor belts to transport the items across the map to where they are needed.',
@@ -30,33 +25,13 @@ export default [
 		unlocks: ['coal_mine', 'titan_mine', 'titan_smelter', 'relay_factory'],
 	},
 	{
-		description: '',
+		description: 'Continue unlocking milestones so we have the material to restore the planet.',
 		requirement: {titan_bar: 50, relay: 30},
 		unlocks: [],
 	},
 	{
-		description: '',
-		requirement: {},
-		unlocks: [],
-	},
-	{
-		description: '',
-		requirement: {},
-		unlocks: [],
-	},
-	{
-		description: '',
-		requirement: {},
-		unlocks: [],
-	},
-	{
-		description: '',
-		requirement: {},
-		unlocks: [],
-	},
-	{
-		description: '',
-		requirement: {},
+		description: 'You reached the temporary end of the game.',
+		requirement: {dummy: 1},
 		unlocks: [],
 	},
 ];

@@ -4,8 +4,6 @@ import Logistics from './Logistics';
 import state from './State';
 import items from '../config/items';
 import {rotate} from './Rotateable';
-import V2 from 'tin-engine/geo/v2';
-import BUILDINGS from '../config/buildings';
 
 // for demo mode
 
@@ -102,7 +100,7 @@ export default class BuildingMap extends Entity {
 			}
 		this.remove(building);
 	}
-		
+
 
 	build(pos) {
 		state.inventory.remove(this.selected.cost);
@@ -110,9 +108,7 @@ export default class BuildingMap extends Entity {
 		const size = this.selected.size;
 		const building = this.selected.type === 'logistics'
 			? new Logistics(pos.prd(t), pos, this.rotation%4, this.selected)
-			: new Building(pos.prd(t), pos, this.rotation%4, this.selected);		
-		if(this.selected && this.isValid(pos, this.selected)) {
-			// check and deduct resources
+			: new Building(pos.prd(t), pos, this.rotation%4, this.selected);
 
 		for (let a = 0; a < size.x; a++)
 			for (let b = 0; b < size.y; b++) {
@@ -126,22 +122,8 @@ export default class BuildingMap extends Entity {
 			}
 
 		this.add(building);
-}
 	}
 
-	onDemoMode() {
-		let i = 0;
-		for(const key in BUILDINGS) {
-			let x = i * 96;
-			this.select(BUILDINGS[key]);
-			const p = new V2(x, 100);
-			p.grid(t,t);
-			const building = this.buildingAt(p.x + 16, 100);
-			this.build(p);
-			if(key === "soil_replenisher") i++;
-			i++;
-		}
-	}
 
 	onClick(pos) {
 		pos.grid(t,t);

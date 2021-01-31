@@ -1,4 +1,5 @@
 import V2 from 'tin-engine/geo/v2';
+import items from './items';
 
 /*
  Building properties:
@@ -16,189 +17,262 @@ import V2 from 'tin-engine/geo/v2';
  - requires: tile id that it needs to be build on
  - type: type of building: mining, production, power, logistics
  - cost: items required to build this
-
  =======
- - milestone: required science level
 
 
 
- ALL RECIPES FOR LEVEL 1:
-
- * power, iron, hydrogen, and copper are available to build immediately
- *
- * IC factory - requires silicon and copper
- * robots - requires circuits and iron
- * vehicles - requires hydrogen and iron
- * soil replenisher - requires robots and vehicles
-
-When the soil replenisher has received enough robots and vehicles, the ground clears up.
-
-LEVEL 2: Clean up water
-	new resource: 
-
-LEVEL 3: Clean up air pollution
-	new resource: water
-
-
+ 'copper_mine', 'copper_smelter', 'wire_factory', 'magnet_factory', 'catapult'
+ 'coal_mine', 'titan_mine', 'titan_smelter', 'relay_factory'
  */
 
 export default {
-
-// Resources
-	silicon_mine: {
-		name: 'Silicon Mine',
-		description: 'Extracts silicon, needed for electronics.',
-		image: 'img/buildings/silicon_factory.png',
+	lumberjack: {
+		name: 'Lumber Camp',
+		description: 'Harvests trees into wood.',
 		type: 'mining',
-		production: 500,
-		output: {silicon: 1},
-		stack: 20,
-		speed: 100,
-		size: new V2(1, 1),
+		image: 'img/buildings/lumber_camp.png',
+		size: new V2(2, 2),
 		destination: new V2(0, 2),
-		milestone: 0
+		requires: items.wood.tile,
+		output: {wood: 1},
+		cost: {stone: 5, iron_ore: 5},
+		production: 500,
+		speed: 200,
+		stack: 20,
 	},
-	test_mine: {
-		name: 'Test Mine',
-		description: 'Test animations.',
-		image: 'img/plus.png',
+	quarry: {
+		name: 'Quarry',
+		description: 'Mines stones from rocks.',
 		type: 'mining',
-		production: 500,
-		output: {hydrogen: 1},
-		stack: 20,
-		speed: 100,
-		frames: 8,
-		size: new V2(1, 1),
+		image: 'img/buildings/lumber_camp_blue.png',
+		size: new V2(2, 2),
 		destination: new V2(0, 2),
-		milestone: 0
-},
-	hydrogen_mine: {
-		name: 'Hydrogen Mine',
-		description: 'Extracts hydrogen, an efficient fuel.',
-		image: 'img/buildings/hydrogen_factory.png',
-		type: 'mining',
+		requires: items.stone.tile,
+		output: {stone: 1},
+		cost: {wood: 5, iron_ore: 5},
 		production: 500,
-		output: {hydrogen: 1},
+		speed: 200,
 		stack: 20,
-		speed: 100,
-		size: new V2(1, 1),
-		destination: new V2(0, 2),
-		milestone: 0
+	},
+	sawmill: {
+		name: 'Sawmill',
+		description: 'Turns wood into planks.',
+		type: 'production',
+		image: 'img/buildings/factory_small_red.png',
+		size: new V2(2, 2),
+		destination: new V2(1, 2),
+		input: {wood: 1},
+		output: {plank: 1},
+		cost: {wood: 10, stone: 10},
+		production: 500,
+		speed: 200,
+		stack: 20,
+	},
+	stone_cutter: {
+		name: 'Stone cutter',
+		description: 'Cuts stones into shape.',
+		type: 'production',
+		image: 'img/buildings/factory_small_blue.png',
+		size: new V2(2, 2),
+		destination: new V2(1, 2),
+		input: {stone: 1},
+		output: {cut_stone: 1},
+		cost: {plank: 5, stone: 10, iron_ore: 5},
+		production: 800,
+		speed: 200,
+		stack: 20,
 	},
 	iron_mine: {
-		name: 'Iron Mine',
-		description: 'Extracts iron, good for construction.',
-		image: 'img/buildings/iron_factory.png',
+		name: 'Iron mine',
+		description: 'Collect iron ore from a deposit in the ground.',
 		type: 'mining',
-		production: 500,
-		output: {iron: 1},
-		stack: 20,
-		speed: 100,
-		size: new V2(1, 1),
+		image: 'img/buildings/mine_blue.png',
+		size: new V2(2, 2),
 		destination: new V2(0, 2),
-		milestone: 0
+		requires: items.iron_ore.tile,
+		output: {iron_ore: 1},
+		production: 750,
+		cost: {plank: 10, cut_stone: 10, iron_ore: 5},
+		speed: 200,
+		stack: 20,
+	},
+	iron_smelter: {
+		name: 'Iron smelter',
+		description: 'Turns iron ore into bars.',
+		type: 'production',
+		image: 'img/buildings/smelter_blue.png',
+		size: new V2(2, 2),
+		destination: new V2(2, 0),
+		input: {iron_ore: 2},
+		output: {iron_bar: 1},
+		cost: {plank: 5, cut_stone: 15, copper_ore: 5},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	crate_factory: {
+		name: 'Copper smelter',
+		description: 'Makes casings from iron bars and planks.',
+		type: 'production',
+		image: 'img/buildings/factory_large_red.png',
+		size: new V2(3, 2),
+		destination: new V2(2, 2),
+		input: {iron_bar: 1, plank: 2},
+		output: {crate: 1},
+		cost: {cut_stone: 10, iron_bar: 5},
+		production: 2000,
+		speed: 200,
+		stack: 20,
 	},
 	copper_mine: {
-		name: 'Copper Mine',
-		description: 'Extracts copper, great for leading electricity.',
-		image: 'img/buildings/copper_factory.png',
+		name: 'Iron mine',
+		description: 'Collect copper ore from a deposit in the ground.',
 		type: 'mining',
-		production: 500,
-		output: {copper: 1},
-		stack: 20,
-		speed: 100,
-		size: new V2(1, 1),
-		destination: new V2(0, 2),
-		milestone: 0
-	},
-
-// Refining
-	IC_manufacturer: {
-		name: 'Circuit Plant',
-		description: 'Produces integrated circuits.',
-		image: 'img/buildings/ic_factory.png',
-		type: 'production',
-		production: 500,
-		input: { silicon: 1, copper: 1 },
-		output: {circuit: 1},
-		stack: 20,
-		speed: 100,
+		image: 'img/buildings/mine_red.png',
 		size: new V2(2, 2),
 		destination: new V2(0, 2),
-		milestone: 0
-	},
-	robot_factory: {
-		name: 'Robot Factory',
-		description: 'Manufactures the best robots iron can make.',
-		image: 'img/buildings/robot_factory.png',
-		type: 'production',
-		production: 500,
-		input: { circuit: 1, iron: 1 },
-		output: {robot: 1},
+		requires: items.copper_ore.tile,
+		output: {copper_ore: 1},
+		cost: {plank: 10, iron_bar: 5, crate: 2},
+		production: 750,
+		speed: 200,
 		stack: 20,
-		speed: 100,
+	},
+	copper_smelter: {
+		name: 'Copper smelter',
+		description: 'Turns copper ore into bars.',
+		type: 'production',
+		image: 'img/buildings/smelter_blue.png',
 		size: new V2(2, 2),
-		destination: new V2(0, 2),
-		milestone: 0
-	},
-	vehicle_factory: {
-		name: 'Vehicle Factory',
-		description: 'Produces hydrogen-fueled vehicles that can remove pollution from soil.',
-		image: 'img/buildings/vehicle_factory.png',
-		type: 'production',
-		production: 500,
-		input: { hydrogen:1, iron: 1 },
-		output: {vehicle: 1},
+		destination: new V2(2, 0),
+		input: {copper_ore: 2},
+		output: {copper_bar: 1},
+		cost: {cut_stone: 20, iron_bar: 5},
+		production: 1000,
+		speed: 200,
 		stack: 20,
-		speed: 100,
+	},
+	wire_factory: {
+		name: 'Wire factory',
+		description: 'Turns copper bars into wire.',
+		type: 'production',
+		image: 'img/buildings/factory_small_green.png',
 		size: new V2(2, 2),
-		destination: new V2(0, 2),
-		milestone: 0
-	},
-	// drone_factory: {
-		// name: 'Drone Factory',
-		// description: 'Produces drones that can clean up the environment.',
-		// image: 'img/buildings/dummy_factory.png',
-		// type: 'production',
-		// production: 500,
-		// output: {drone: 1},
-		// stack: 20,
-		// speed: 100,
-		// size: new V2(2, 2),
-		// destination: new V2(0, 2),
-		// milestone: 0
-	// },
-	soil_replenisher: {
-		name: 'Soil Replenisher',
-		description: 'Robots and vehicles are sent out to clean up the soil.',
-		image: 'img/buildings/soil_replenisher.png',
-		type: 'production',
-		production: 500,
-		input: { robot: 5, vehicle: 5 },
-		output: {victory_point: 1},
+		destination: new V2(1, 2),
+		input: {copper_bar: 1},
+		output: {wire: 2},
+		cost: {plank: 10, iron_bar: 5, crate: 2},
+		production: 1000,
+		speed: 200,
 		stack: 20,
-		speed: 100,
-		size: new V2(4, 4),
-		destination: new V2(0, 2),
-		milestone: 0
 	},
-
-// Power supply
-	wind_power: {
-		name: 'Wind power plant',
-		description: 'Produces electricity from fast moving air.',
-		image: 'img/buildings/wind_power.png',
-		type: 'power',
-		production: 500,
+	gear_factory: {
+		name: 'Gear factory',
+		description: 'Turns iron bars into gears.',
+		type: 'production',
+		image: 'img/buildings/factory_small_green.png',
+		size: new V2(2, 2),
+		destination: new V2(1, 2),
+		input: {iron_bar: 2},
+		output: {gear: 1},
+		cost: {plank: 10, iron_bar: 5, crate: 2},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	magnet_factory: {
+		name: 'Magnet factory',
+		description: 'Turns wire and iron bars into magnets.',
+		type: 'production',
+		image: 'img/buildings/factory_large_red.png',
+		size: new V2(3, 2),
+		destination: new V2(2, 2),
+		input: {wire: 2, iron_bar: 1},
+		output: {magnet:1},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	catapult: {
+		name: 'Conveyor catapult',
+		description: 'Can throw items across another belt or obstacle',
+		image: 'img/buildings/catapult.png',
+		group: 'conveyor',
 		frames: 4,
-		output: {power: 1},
-		stack: 20,
-		speed: 100,
+		type: 'logistics',
+		speed: 200,
 		size: new V2(1, 1),
-		destination: new V2(0, 1),
-		milestone: 0
+		destination: new V2(1, 0),
+		cost: {iron_bar: 1, gear: 2},
+		stack: 20,
+	},
+	coal_mine: {
+		name: 'Coal mine',
+		description: 'Collect coal from a deposit in the ground.',
+		type: 'mining',
+		image: 'img/buildings/mine_green.png',
+		size: new V2(2, 2),
+		destination: new V2(0, 2),
+		requires: items.coal.tile,
+		output: {coal: 1},
+		cost: {iron_bar: 5, wire: 5},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	titan_mine: {
+		name: 'Titan mine',
+		description: 'Collect titan ore from a deposit in the ground.',
+		type: 'mining',
+		image: 'img/buildings/mine_green.png',
+		size: new V2(2, 2),
+		destination: new V2(0, 2),
+		requires: items.titan_ore.tile,
+		output: {titan_ore: 1},
+		cost: {gear: 5, copper_bar: 5},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	titan_smelter: {
+		name: 'Titan smelter',
+		description: 'Turns coal and titan ore into bars.',
+		image: 'img/buildings/smelter_green.png',
+		size: new V2(2, 2),
+		destination: new V2(2, 0),
+		input: {titan_ore: 1, coal: 1},
+		output: {titan_bar: 1},
+		cost: {cut_stone: 10, gear: 5, magnet: 5},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	relay_factory: {
+		name: 'Relay factory',
+		image: 'img/buildings/factory_large_red.png',
+		size: new V2(3, 2),
+		destination: new V2(2, 2),
+		input: {magnet: 1, crate: 1},
+		output: {relay: 1},
+		cost: {crate: 10, gear: 5, magnet: 5},
+		production: 1000,
+		speed: 200,
+		stack: 20,
+	},
+	conveyor: {
+		name: 'Conveyor belt',
+		description: 'Moves items in a straight line',
+		image: 'img/buildings/conveyor.png',
+		group: 'conveyor',
+		frames: 4,
+		type: 'logistics',
+		speed: 200,
+		size: new V2(1, 1),
+		destination: new V2(1, 0),
+		cost: {cut_stone: 1, plank: 1}
 	},
 
+	// testing stuff
 	dummy_replicator: {
 		name: 'Dummy Replicator',
 		description: 'Produces free dummy items!',
@@ -213,15 +287,4 @@ export default {
 		milestone: 0,
 		cost: {wood: 1}
 	},
-	conveyor: {
-		name: 'Conveyor belt',
-		description: 'Moves items in a straight line',
-		image: 'img/buildings/conveyor_belt.png',
-		frames: 3,
-		type: 'logistics',
-		speed: 200,
-		size: new V2(1, 1),
-		destination: new V2(1, 0),
-		cost: {stone: 1}
-	}
 };
