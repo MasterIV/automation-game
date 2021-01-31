@@ -6,10 +6,50 @@ import Rotateable from './Rotateable';
 export default class Building extends Rotateable {
 	constructor(pos, grid, rota, definition) {
 		super(pos, grid, rota, definition);
+		super(pos);
+		console.log("building: ", pos);
+		console.log("building: ", this.position);
+
+		// translate the destination
+		// maybe collect the closest tile within the destination to be the origin
+		 this.dest = grid.sum(definition.destination);
+		this.rota = rota;
+
 		this.inv = new Inventory();
 		this.processing = 0;
 		
 		this.definition = definition;
+
+		if(definition.frames) {
+			if(!Animation.groups[definition.image])
+				Animation.add(definition.image, 200, definition.frames);
+			this.add(new Animation(definition.image, definition.image));
+		} else {
+			this.add(new ImageEntity(null, definition.image));
+		}
+	}
+
+	draw(ctx) {
+		ctx.save();
+		// ctx.translate(this.position.x, this.position.y);
+		// ctx.rotate(Math.PI * this.rota/2);
+
+		// Do rotation stuff here
+		//
+		// if(this.rota == 0) ctx.translate( -32, -32);
+		// else if(this.rota == 1) ctx.translate(this.size.y, 0);
+		// if(this.rota == 1) ctx.translate(32, 32);
+		// else if(this.rota ==2) ctx.translate(-this.size.x, -this.size.y);
+		// else if(this.rota == 3) ctx.translate(0, this.size.x);
+		// if(this.rota == 1) ctx.translate(this.size.y + 32, 0);
+		// else if(this.rota == 2) ctx.translate(-this.size.x, -this.size.y);
+		// else if(this.rota == 3) ctx.translate(0, this.size.x - 32);
+		// ctx.translate(this.position.x, this.position.y);
+
+		if (this.onDraw) this.onDraw(ctx);
+		this.dispatch(this.entities, 'draw', ctx);
+
+		ctx.restore();
 	}
 
 	accepts(type) {
