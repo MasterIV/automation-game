@@ -4,6 +4,7 @@ import Logistics from './Logistics';
 import state from './State';
 import items from '../config/items';
 import {rotate} from './Rotateable';
+import Collect from './Collect';
 
 // for demo mode
 
@@ -53,7 +54,10 @@ export default class BuildingMap extends Entity {
 	}
 
 	collect(building, type) {
-		const items = {[type]: building.inv.get(type)};
+		const amount = building.inv.get(type);
+		const items = {[type]: amount};
+
+		this.parent.add(new Collect(building.position.clone(), type, '+' + amount));
 		building.inv.remove(items);
 		state.inventory.add(items);
 	}
@@ -138,6 +142,7 @@ export default class BuildingMap extends Entity {
 			this.setBuilding(building);
 		} else if(tile && this.collectibles[tile]) {
 			// show collect animation
+			this.parent.add(new Collect(pos.prd(32), this.collectibles[tile], '+1'));
 			state.inventory.add({[this.collectibles[tile]]: 1});
 		}
 	}
