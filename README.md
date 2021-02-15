@@ -68,10 +68,10 @@ Electricity might have a simplified logistic system to be distributed across bui
 
 Bug fixes:
 
-- duplicate entries when switching between build menus
 - fix demolish
 
 Maybe:
 
+- show which resource is insufficient
 - help / tutorial
 - ask artist for better assets

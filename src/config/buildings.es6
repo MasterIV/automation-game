@@ -107,7 +107,7 @@ export default {
 		stack: 20,
 	},
 	crate_factory: {
-		name: 'Copper smelter',
+		name: 'Crate Factory',
 		description: 'Makes casings from iron bars and planks.',
 		type: 'production',
 		image: 'img/buildings/factory_large_red.png',
@@ -121,7 +121,7 @@ export default {
 		stack: 20,
 	},
 	copper_mine: {
-		name: 'Iron mine',
+		name: 'Copper mine',
 		description: 'Collect copper ore from a deposit in the ground.',
 		type: 'mining',
 		image: 'img/buildings/mine_red.png',
