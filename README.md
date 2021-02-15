@@ -106,18 +106,12 @@ Copper mine: Resource
 
 ## Work to do
 
-- **Map:** we can either handcraft or generate one. Need to find a nice tile set
-- **UI:** we have the following elements:
-  - Build menu
-  - Milestone display
-  - Global inventory
-  - Building details
-  - Unlock notification
-- **Game design:**
-  - Items/Resources
-  - Buildings
-  - Recipes
-  - Milestones
-- **Game Elements:**
-  - Logistics system
-  - Buildings
+- resource collection feedback
+- right click to cancel
+- r for rotate building
+- milestone unlocked feedback
+
+Bug fixes:
+
+- duplicate entries when switching between build menues
+- update building inventory

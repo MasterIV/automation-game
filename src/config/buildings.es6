@@ -200,7 +200,7 @@ export default {
 		speed: 500,
 		size: new V2(1, 1),
 		destination: new V2(1, 0),
-		cost: {iron_bar: 1, gear: 2},
+		// cost: {iron_bar: 1, gear: 2},
 		stack: 20,
 	},
 	coal_mine: {
@@ -266,7 +266,7 @@ export default {
 		speed: 500,
 		size: new V2(1, 1),
 		destination: new V2(1, 0),
-		cost: {cut_stone: 1, plank: 1}
+		// cost: {cut_stone: 1, plank: 1}
 	},
 
 	// testing stuff

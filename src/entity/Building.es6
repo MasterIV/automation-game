@@ -8,20 +8,25 @@ export default class Building extends Rotateable {
 		super(pos, grid, rota, definition);
 		this.inv = new Inventory();
 		this.processing = 0;
+		this.completed = true;
 	}
 
 	accepts(type) {
-		return (this.def.type === 'storage' && this.inv.size() < this.def.stack) || // storage building
-				(this.def.input && this.def.input[type] && this.inv.get(type) < this.def.stack); // production building
+		return this.completed && (
+			(this.def.type === 'storage' && this.inv.size() < this.def.stack) || // storage building
+			(this.def.input && this.def.input[type] && this.inv.get(type) < this.def.stack)
+		); // production building
 	}
 
 	pass(item) {
 		// storage and production
+		this.completed = false;
 		item.add(new Morph({
-			position: this.position
+			position: this.position.clone()
 		}, this.def.speed, null, () => {
 			this.inv.add({[item.type]: 1});
 			item.parent.remove(item);
+			this.completed = true;
 		}))
 	}
 
