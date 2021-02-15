@@ -14,20 +14,20 @@ export default class GameScene extends Scene {
 		this.setSize(config.screen.w, config.screen.h);
 
 		const map = new TileMap('default');
-		const buildings = new BuildingMap(map);
+		this.buildings = new BuildingMap(map);
 
 		const viewport = new Viewport();
 		viewport.dragable(true);
 		viewport.add(map.render());
-		viewport.add(buildings);
+		viewport.add(this.buildings);
 		this.add(viewport);
-
-		ReactDOM.render(
-			React.createElement(Menu, {buildings}),
-			document.getElementById('ui'));
 	}
 
 	onUpdate(delta) {
 		Animation.update(delta);
+
+		ReactDOM.render(
+			React.createElement(Menu, {buildings: this.buildings}),
+			document.getElementById('ui'));
 	}
 }
