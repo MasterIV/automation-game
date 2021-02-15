@@ -14,18 +14,16 @@ export default class TitleScene extends Scene {
 		this.setSize(config.screen.w, config.screen.h);
 		this.bg = 'img/title.png';
 
-		const layout = new VerticalLayout(new V2(0, 200), 0, 30);
+		const layout = new VerticalLayout(new V2(0, 100), 0, 30);
 		const playButton = Button.create(new V2(100, 100), () => {
 			this.parent.goto(new GameScene());
 		}).img('img/button_play.png', 1);
 
 		const helpButton = Button.create(new V2(249, 363), () => this.parent.goto(new HelpScene())).img("img/button_help.png", 1);
 		const creditsButton = Button.create(new V2(208, 404), () => this.parent.goto(new CreditsScene())).img("img/button_credits.png", 1);
-		const demoButton = Button.create(new V2(208, 404), () => this.parent.goto(new GameScene(true))).img("img/button_demo.png", 1);
 
-		layout.add(demoButton);
 		layout.add(playButton);
-		layout.add(helpButton);
+		// layout.add(helpButton);
 		layout.add(creditsButton);
 		this.center(layout);
 	}

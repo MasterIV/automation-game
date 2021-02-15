@@ -61,7 +61,6 @@ Electricity might have a simplified logistic system to be distributed across bui
 
 ## Work to do
 
-- resource collection feedback
 - right click to cancel
 - r for rotate building
 - milestone unlocked feedback
@@ -69,7 +68,7 @@ Electricity might have a simplified logistic system to be distributed across bui
 
 Bug fixes:
 
-- duplicate entries when switching between build menues
+- duplicate entries when switching between build menus
 - update building inventory
 
 Maybe:
